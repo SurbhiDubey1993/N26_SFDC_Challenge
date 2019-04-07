@@ -1,0 +1,29 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" Controller="N26_Product_Info_Controller" access="global" >
+
+    <!--Aura Attribute Declaration-->
+    <aura:attribute name="recordId" type="String" access="global" />
+    <aura:attribute name="selTabId" type="String" default="tab1"/>
+    <aura:attribute name="productInfoList" type="List" />
+    <aura:attribute name="showErrors" type="Boolean" default="FALSE"/>
+    <aura:attribute name="errorMessage" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/> 
+    
+    <!--Aura Component-->
+    <div aura:id="data-display">
+        <lightning:tabset onselect="{!c.tabSelected}" variant="default" selectedTabId="{!v.selTabId}">
+            <!--TAB 1-->
+            <lightning:tab aura:id="tab1" id="tab1" tabIndex="1" label="Cost Per Calendar Month">
+                <c:N26_Product_Info_InnerCMP productInfoList="{!v.productInfoList}"></c:N26_Product_Info_InnerCMP>
+            </lightning:tab>
+            <!--TAB 2-->
+            <lightning:tab aura:id="tab2" id="tab2" tabIndex="2" label="ATM Fees in Currencies">
+            	<c:N26_Product_Info_InnerCMP productInfoList="{!v.productInfoList}"></c:N26_Product_Info_InnerCMP>
+            </lightning:tab>
+            <!--TAB 3-->
+            <lightning:tab aura:id="tab3" id="tab3" tabIndex="3" label="Card Replacement Cost">
+            	<c:N26_Product_Info_InnerCMP productInfoList="{!v.productInfoList}"></c:N26_Product_Info_InnerCMP>
+            </lightning:tab>
+        </lightning:tabset>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,46 @@
+<aura:component>
+    <!--Aura Attribute Declaration-->
+    <aura:attribute name="productInfoList" type="List" />
+        <!--Inner Component for Code Reusability-->
+		<div id="innerDiv">			
+			<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+				<thead>
+				<tr class="slds-line-height_reset">
+				  <th scope="col"><span class="slds-truncate">Home Country</span></th>
+				  <th scope="col"><span class="slds-truncate">Product Name</span></th>
+				  <th scope="col"><span class="slds-truncate">Product Rate</span></th>
+				  </tr>
+				</thead>
+				<tbody>
+					<aura:iteration items="{!v.productInfoList}" var="productInfo">
+						<tr>
+							<td>{!productInfo.Home_Country__c}</td>
+							<td>{!productInfo.Product__c}</td>
+							<td>{!productInfo.Rates__c}</td>
+						</tr>
+					</aura:iteration>
+				</tbody>
+			</table>
+			<!-- ERROR MESSAGE IF NO MATCHING RECORDS FOUND--> 
+			<aura:if isTrue="{!(empty(v.productInfoList))}">
+				<div class="slds-notify_container slds-is-relative">
+					<div class="slds-notify slds-notify_toast slds-theme_error" role="alert">
+						<div class="slds-notify__content">
+							<h2 class="slds-text-heading_small">No Records Found...</h2>
+						</div>
+					</div>
+				</div>
+			</aura:if>
+			<aura:if isTrue="{!v.showError}">
+				<!-- Show Error Message if Exception occurs -->
+				<div class="slds-notify slds-notify_toast slds-theme_error">
+					<span class="slds-assistive-text">error</span>
+					<div class="slds-notify__content">
+						<h5 class="slds-text-heading_small slds-align_absolute-center">Error Message </h5>
+						<br/>
+						<p class="slds-align_absolute-center">{!v.errorMessage}</p>                
+					</div>
+				</div>
+			</aura:if>
+		</div>
+</aura:component>
